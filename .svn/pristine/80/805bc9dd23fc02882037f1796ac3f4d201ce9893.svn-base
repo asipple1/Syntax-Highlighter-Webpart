@@ -1,0 +1,7 @@
+import * as React from 'react';
+import { ISyntaxHighlightProps } from './ISyntaxHighlightProps';
+export default class SyntaxHighlight extends React.Component<ISyntaxHighlightProps, {}> {
+    handleChange: (data: any) => void;
+    render(): React.ReactElement<ISyntaxHighlightProps>;
+}
+//# sourceMappingURL=SyntaxHighlight.d.ts.map

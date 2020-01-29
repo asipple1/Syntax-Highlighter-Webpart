@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "syntax-highlighter-webpart-client-side-solution",
+    "id": "16d1b43a-b4e0-479c-8816-759c6a8f2413",
+    "version": "1.0.0.6",
+    "includeClientSideAssets": false
+  },
+  "paths": {
+    "zippedPackage": "solution/syntax-highlighter-webpart.sppkg"
+  }
+}

@@ -1,0 +1,30 @@
+import { Version } from '@microsoft/sp-core-library';
+import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
+import { ISyntaxHighlightWebPartProps } from './ISyntaxHighlightWebPartProps';
+export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISyntaxHighlightWebPartProps> {
+    /**
+   * @var
+   * Unique ID of this Web Part instance
+   */
+    private guid;
+    render(): void;
+    /**
+    * Saves the updated content to the web part properties
+    */
+    private handleContentChange;
+    protected onDispose(): void;
+    protected readonly dataVersion: Version;
+    /**
+     * @function
+     * Generates a GUID
+     */
+    private getGuid;
+    /**
+     * @function
+     * Generates a GUID part
+     */
+    private s4;
+    protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration;
+}
+//# sourceMappingURL=SyntaxHighlightWebPart.d.ts.map

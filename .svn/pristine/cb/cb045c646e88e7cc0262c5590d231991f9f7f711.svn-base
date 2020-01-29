@@ -1,0 +1,160 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+import * as React from 'react';
+import * as ReactDom from 'react-dom';
+import { Version, DisplayMode } from '@microsoft/sp-core-library';
+import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { PropertyPaneDropdown, PropertyPaneToggle, PropertyPaneCheckbox, PropertyPaneTextField, } from '@microsoft/sp-property-pane';
+import SyntaxHighlight from './components/SyntaxHighlight';
+var SyntaxHighlightWebPart = /** @class */ (function (_super) {
+    __extends(SyntaxHighlightWebPart, _super);
+    function SyntaxHighlightWebPart() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /**
+        * Saves the updated content to the web part properties
+        */
+        _this.handleContentChange = function (code) {
+            _this.properties.editCodeContent = code;
+            _this.properties.liveCodeContent = code;
+        };
+        return _this;
+    }
+    SyntaxHighlightWebPart.prototype.render = function () {
+        var props = this.properties;
+        var element = React.createElement(SyntaxHighlight, {
+            isEditMode: this.displayMode === DisplayMode.Edit,
+            titleCode: this.properties.titleCode,
+            editCodeContent: this.properties.editCodeContent,
+            liveCodeContent: this.properties.liveCodeContent,
+            language: this.properties.language,
+            theme: this.properties.theme,
+            fontSize: this.properties.fontSize,
+            showGutter: this.properties.showGutter,
+            fullWidth: this.properties.fullWidth,
+            align: this.properties.align,
+            onChange: this.handleContentChange
+        });
+        ReactDom.render(element, this.domElement);
+    };
+    SyntaxHighlightWebPart.prototype.onDispose = function () {
+        ReactDom.unmountComponentAtNode(this.domElement);
+    };
+    Object.defineProperty(SyntaxHighlightWebPart.prototype, "dataVersion", {
+        get: function () {
+            return Version.parse('1.0');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @function
+     * Generates a GUID
+     */
+    SyntaxHighlightWebPart.prototype.getGuid = function () {
+        return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
+            this.s4() + '-' + this.s4() + this.s4() + this.s4();
+    };
+    /**
+     * @function
+     * Generates a GUID part
+     */
+    SyntaxHighlightWebPart.prototype.s4 = function () {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    };
+    SyntaxHighlightWebPart.prototype.getPropertyPaneConfiguration = function () {
+        return {
+            pages: [
+                {
+                    groups: [
+                        {
+                            groupFields: [
+                                PropertyPaneTextField('titleCode', {
+                                    label: 'Title',
+                                    multiline: true
+                                }),
+                                PropertyPaneDropdown('language', {
+                                    label: 'Code Language',
+                                    options: [
+                                        { key: 'javascript', text: 'Javascript' },
+                                        { key: 'sh', text: 'Bash/shell' },
+                                        { key: 'php', text: 'PHP' },
+                                        { key: 'python', text: 'Python' },
+                                        { key: 'css', text: 'CSS' },
+                                        { key: 'scss', text: 'SCSS' },
+                                        { key: 'sass', text: 'SASS' },
+                                        { key: 'xml', text: 'XML' },
+                                        { key: 'ruby', text: 'Ruby' },
+                                        { key: 'yaml', text: 'Yaml' },
+                                        { key: 'twig', text: 'Twig' },
+                                        { key: 'markdown', text: 'Markdown' },
+                                        { key: 'mysql', text: 'Mysql' },
+                                        { key: 'json', text: 'JSON' },
+                                        { key: 'html', text: 'HTML' },
+                                        { key: 'typescript', text: 'Typescript' }
+                                    ]
+                                }),
+                                PropertyPaneDropdown('theme', {
+                                    label: 'Theme',
+                                    options: [
+                                        { key: "monokai", text: "Monokai" },
+                                        { key: "github", text: "Github" },
+                                        { key: "tomorrow", text: "Tomorrow" },
+                                        { key: "kuroir", text: "Kuroir" },
+                                        { key: "twilight", text: "Twilight" },
+                                        { key: "xcode", text: "Xcode" },
+                                        { key: "textmate", text: "Textmate" },
+                                        { key: "solarized_dark", text: "Solarized Dark" },
+                                        { key: "solarized_light", text: "Solarized Light" },
+                                        { key: "terminal", text: "Terminal" }
+                                    ]
+                                }),
+                                PropertyPaneDropdown('fontSize', {
+                                    label: 'Font Size',
+                                    options: [
+                                        { key: 14, text: "14" },
+                                        { key: 16, text: "16" },
+                                        { key: 18, text: "18" },
+                                        { key: 20, text: "20" },
+                                        { key: 24, text: "24" },
+                                        { key: 28, text: "28" },
+                                        { key: 32, text: "32" },
+                                        { key: 40, text: "40" }
+                                    ]
+                                }),
+                                PropertyPaneToggle('showGutter', {
+                                    label: 'Show Gutter & Line Numbers',
+                                    onText: 'On',
+                                    offText: 'Off'
+                                }),
+                                PropertyPaneCheckbox('fullWidth', {
+                                    text: 'Set Full Width'
+                                }),
+                                PropertyPaneDropdown('align', {
+                                    label: 'Alignment',
+                                    options: [
+                                        { key: "left", text: "Left" },
+                                        { key: "center", text: "Center" },
+                                        { key: "right", text: "Right" }
+                                    ]
+                                })
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+    };
+    return SyntaxHighlightWebPart;
+}(BaseClientSideWebPart));
+export default SyntaxHighlightWebPart;
+//# sourceMappingURL=SyntaxHighlightWebPart.js.map

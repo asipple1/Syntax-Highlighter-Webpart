@@ -1,0 +1,16 @@
+/* tslint:disable */
+require("./SyntaxHighlight.module.css");
+var styles = {
+    syntaxHighlight: 'syntaxHighlight_a20d20ba',
+    container: 'container_a20d20ba',
+    container__full_width: 'container__full_width_a20d20ba',
+    container__left: 'container__left_a20d20ba',
+    container__center: 'container__center_a20d20ba',
+    container__right: 'container__right_a20d20ba',
+    syntaxHighlight__headline: 'syntaxHighlight__headline_a20d20ba',
+    subTitle: 'subTitle_a20d20ba',
+    description: 'description_a20d20ba'
+};
+export default styles;
+/* tslint:enable */ 
+//# sourceMappingURL=SyntaxHighlight.module.scss.js.map
