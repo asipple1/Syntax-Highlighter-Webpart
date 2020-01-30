@@ -16,6 +16,17 @@
     &__right {
       margin: 0 0 0 auto;
     }
+
+    .clipboardTab {
+      opacity: 0;
+      transition: .5s ease;
+    }
+
+    &:hover {
+      .clipboardTab {
+        opacity: 1;
+      }
+    }
   }
 
   &__headline {

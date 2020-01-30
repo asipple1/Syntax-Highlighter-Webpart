@@ -74,7 +74,7 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
           }
           { !this.props.isEditMode &&
             <CopyToClipboard text={content}>
-              <PrimaryButton text="Copy Code Snippet" />
+                <PrimaryButton className={styles.clipboardTab} text="Copy Code Snippet" />
             </CopyToClipboard>
           }
           { this.props.isEditMode &&
