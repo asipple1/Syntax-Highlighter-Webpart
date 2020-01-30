@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './SyntaxHighlight.module.scss';
 import { ISyntaxHighlightProps } from './ISyntaxHighlightProps';
-import { PrimaryButton } from 'office-ui-fabric-react';
+import { PrimaryButton, IIconProps } from 'office-ui-fabric-react';
 
 
 // Copy to clipboar.
@@ -11,6 +11,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import AceEditor from 'react-ace';
 
 // Themes TODO: Look into a better way to handle language and theme arrays.
+const copyIcon: IIconProps = { iconName: 'Copy' };
 
 // Supported Languages.
 const languages = [
@@ -54,10 +55,19 @@ themes.forEach(theme => require(`ace-builds/src-noconflict/theme-${theme}`));
 
 export default class SyntaxHighlight extends React.Component<ISyntaxHighlightProps, {}> {
 
+  constructor(props) {
+    super(props);
+
+    this._onClick = this._onClick.bind(this);
+  }
+
   public handleChange = (data) => {
     this.props.onChange(data);
   }
 
+  private _onClick() {
+
+  }
 
   public render(): React.ReactElement<ISyntaxHighlightProps> {
     const content = this.props.editCodeContent ? this.props.editCodeContent : '';
@@ -74,7 +84,12 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
           }
           { !this.props.isEditMode &&
             <CopyToClipboard text={content}>
-                <PrimaryButton className={styles.clipboardTab} text="Copy Code Snippet" />
+                <PrimaryButton
+                className={styles.clipboardTab}
+                text="Copy"
+                iconProps={copyIcon}
+                onClick={this._onClick}
+              />
             </CopyToClipboard>
           }
           { this.props.isEditMode &&

@@ -19,12 +19,14 @@
 
     .clipboardTab {
       opacity: 0;
+      transform: translateY(75%);
       transition: .5s ease;
     }
 
     &:hover {
       .clipboardTab {
         opacity: 1;
+        transform: translateY(0);
       }
     }
   }
