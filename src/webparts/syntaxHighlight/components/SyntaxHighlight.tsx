@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styles from './SyntaxHighlight.module.scss';
 import { ISyntaxHighlightProps } from './ISyntaxHighlightProps';
+import { ISyntaxHighlightState } from './ISyntaxHighlightState';
 import { PrimaryButton, IIconProps } from 'office-ui-fabric-react';
 
 
@@ -53,11 +54,14 @@ languages.forEach(lang => {
 });
 themes.forEach(theme => require(`ace-builds/src-noconflict/theme-${theme}`));
 
-export default class SyntaxHighlight extends React.Component<ISyntaxHighlightProps, {}> {
+export default class SyntaxHighlight extends React.Component<ISyntaxHighlightProps, ISyntaxHighlightState> {
 
   constructor(props) {
     super(props);
 
+    this.state = {
+      isCopied: false
+    }
     this._onClick = this._onClick.bind(this);
   }
 
@@ -66,7 +70,8 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
   }
 
   private _onClick() {
-
+    this.setState({isCopied: true});
+    setTimeout(() => {this.setState({isCopied: false})}, 1500);
   }
 
   public render(): React.ReactElement<ISyntaxHighlightProps> {
@@ -86,7 +91,7 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
             <CopyToClipboard text={content}>
                 <PrimaryButton
                 className={styles.clipboardTab}
-                text="Copy"
+                text={this.state.isCopied ? "Copied!" : "Copy"}
                 iconProps={copyIcon}
                 onClick={this._onClick}
               />
