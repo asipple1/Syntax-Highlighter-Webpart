@@ -60,27 +60,27 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
     super(props);
 
     this.state = {
-      isCopied: false
+      isCopied: false,
+      isExpanded: false,
     }
-    this._onClick = this._onClick.bind(this);
+    this._onCopyClick = this._onCopyClick.bind(this);
+    this._onExpandClick = this._onExpandClick.bind(this);
   }
 
-  public handleChange = (data) => {
-    this.props.onChange(data);
-  }
-
-  private _onClick() {
+  private _onCopyClick() {
     this.setState({isCopied: true});
     setTimeout(() => {this.setState({isCopied: false})}, 1500);
   }
 
+  private _onExpandClick() {
+    this.setState({isExpanded: !this.state.isExpanded});
+  }
+
   public render(): React.ReactElement<ISyntaxHighlightProps> {
-    const content = this.props.editCodeContent ? this.props.editCodeContent : '';
     const alignment = this.props.align ? `container__${this.props.align}` : 'container__left';
     const fullWidth = this.props.fullWidth ? `container__full_width` : '';
     return (
       <div className={styles.syntaxHighlight}>
-
         <div className={`${styles.container} ${styles[alignment]} ${styles[fullWidth]}`}>
           { this.props.titleCode &&
             <h3 className={styles.syntaxHighlight__headline}>
@@ -88,12 +88,12 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
             </h3>
           }
           { !this.props.isEditMode &&
-            <CopyToClipboard text={content}>
+            <CopyToClipboard text={this.props.editCodeContent}>
                 <PrimaryButton
                 className={styles.clipboardTab}
                 text={this.state.isCopied ? "Copied!" : "Copy"}
                 iconProps={copyIcon}
-                onClick={this._onClick}
+                onClick={this._onCopyClick}
               />
             </CopyToClipboard>
           }
@@ -103,9 +103,8 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
               mode={this.props.language ? this.props.language : 'javascript'}
               showGutter={this.props.showGutter}
               fontSize={this.props.fontSize ? this.props.fontSize : 14}
-              value={content}
+              value={this.props.editCodeContent}
               width="100%"
-              onChange={this.handleChange}
               enableSnippets={true}
               wrapEnabled={true}
               maxLines={Infinity}
@@ -120,21 +119,21 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
           }
           { !this.props.isEditMode &&
             <AceEditor 
-            theme={this.props.theme ? this.props.theme : 'monokai'}
-            mode={this.props.language ? this.props.language : 'javascript'}
-            readOnly={true}
-            showGutter={this.props.showGutter}
-            fontSize={this.props.fontSize ? this.props.fontSize : 14}
-            value={content}
-            width="100%"
-            maxLines={Infinity}
-            wrapEnabled={true}
-            setOptions={{
-              showLineNumbers: true,
-              displayIndentGuides: true,
-              tabSize: 2
-            }}
-          />
+              theme={this.props.theme ? this.props.theme : 'monokai'}
+              mode={this.props.language ? this.props.language : 'javascript'}
+              readOnly={true}
+              showGutter={this.props.showGutter}
+              fontSize={this.props.fontSize ? this.props.fontSize : 14}
+              value={this.props.editCodeContent}
+              width="100%"
+              maxLines={10}
+              wrapEnabled={true}
+              setOptions={{
+                showLineNumbers: true,
+                displayIndentGuides: true,
+                tabSize: 2
+              }}
+            />
           }
         </div>
       </div>
