@@ -38,10 +38,18 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
         showGutter: this.properties.showGutter,
         fullWidth: this.properties.fullWidth,
         align: this.properties.align,
+        onChange: this.handleContentChange,
       }
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+     /**
+   * Saves the updated content to the web part properties
+   */
+  private handleContentChange = (code: string) => {
+    this.properties.editCodeContent = code;
   }
 
   protected onDispose(): void {

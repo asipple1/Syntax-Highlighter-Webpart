@@ -67,6 +67,10 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
     this._onExpandClick = this._onExpandClick.bind(this);
   }
 
+  public handleChange = (data) => {
+    this.props.onChange(data);
+  }
+
   private _onCopyClick() {
     this.setState({isCopied: true});
     setTimeout(() => {this.setState({isCopied: false})}, 1500);
@@ -105,6 +109,7 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
               fontSize={this.props.fontSize ? this.props.fontSize : 14}
               value={this.props.editCodeContent}
               width="100%"
+              onChange={this.handleChange}
               enableSnippets={true}
               wrapEnabled={true}
               maxLines={Infinity}
