@@ -1,4 +1,5 @@
 export interface ISyntaxHighlightState {
-    isCopied: boolean
+    isCopied: boolean;
+    isExpanded: boolean;
 }
   

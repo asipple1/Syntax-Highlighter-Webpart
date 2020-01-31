@@ -32,29 +32,17 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
         isEditMode: this.displayMode === DisplayMode.Edit,
         titleCode: this.properties.titleCode,
         editCodeContent: this.properties.editCodeContent,
-        liveCodeContent: this.properties.liveCodeContent,
         language: this.properties.language,
         theme: this.properties.theme,
         fontSize: this.properties.fontSize,
         showGutter: this.properties.showGutter,
         fullWidth: this.properties.fullWidth,
         align: this.properties.align,
-        onChange: this.handleContentChange
       }
     );
 
     ReactDom.render(element, this.domElement);
   }
-
-   /**
-   * Saves the updated content to the web part properties
-   */
-  private handleContentChange = (code: string) => {
-    this.properties.editCodeContent = code;
-    this.properties.liveCodeContent = code;
-  }
-
-
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
