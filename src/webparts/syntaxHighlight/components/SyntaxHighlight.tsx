@@ -64,7 +64,7 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
     this.state = {
       isCopied: false,
       isExpanded: false,
-    }
+    };
     this._onCopyClick = this._onCopyClick.bind(this);
     this._onExpandClick = this._onExpandClick.bind(this);
   }
@@ -75,7 +75,9 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
 
   private _onCopyClick() {
     this.setState({isCopied: true});
-    setTimeout(() => {this.setState({isCopied: false})}, 1500);
+    setTimeout(() => {
+      this.setState({isCopied: false});
+    }, 1500);
   }
 
   private _onExpandClick() {

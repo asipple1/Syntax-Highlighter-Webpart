@@ -1,0 +1,5 @@
+export interface ISyntaxHighlightState {
+    isCopied: boolean;
+    isExpanded: boolean;
+}
+//# sourceMappingURL=ISyntaxHighlightState.d.ts.map

@@ -1,0 +1,14 @@
+declare const styles: {
+    syntaxHighlight: string;
+    container: string;
+    container__full_width: string;
+    container__left: string;
+    container__center: string;
+    container__right: string;
+    clipboardTab: string;
+    syntaxHighlight__headline: string;
+    subTitle: string;
+    description: string;
+};
+export default styles;
+//# sourceMappingURL=SyntaxHighlight.module.scss.d.ts.map

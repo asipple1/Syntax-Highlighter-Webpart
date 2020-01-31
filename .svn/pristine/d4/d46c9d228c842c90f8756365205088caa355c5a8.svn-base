@@ -1,0 +1,104 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+import * as React from 'react';
+import styles from './SyntaxHighlight.module.scss';
+import { PrimaryButton } from 'office-ui-fabric-react';
+// Copy to clipboar.
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+// Ace Editor.
+import AceEditor from 'react-ace';
+// Themes TODO: Look into a better way to handle language and theme arrays.
+var copyIcon = { iconName: 'Copy' };
+// Supported Languages.
+var languages = [
+    "javascript",
+    "php",
+    "python",
+    "apache_conf",
+    "sh",
+    "css",
+    "sass",
+    "scss",
+    "xml",
+    "ruby",
+    "yaml",
+    "twig",
+    "markdown",
+    "mysql",
+    "json",
+    "html",
+    "typescript"
+];
+var themes = [
+    "monokai",
+    "github",
+    "tomorrow",
+    "kuroir",
+    "twilight",
+    "xcode",
+    "textmate",
+    "solarized_dark",
+    "solarized_light",
+    "terminal"
+];
+languages.forEach(function (lang) {
+    require("ace-builds/src-noconflict/mode-" + lang);
+    require("ace-builds/src-noconflict/snippets/" + lang);
+});
+themes.forEach(function (theme) { return require("ace-builds/src-noconflict/theme-" + theme); });
+var SyntaxHighlight = /** @class */ (function (_super) {
+    __extends(SyntaxHighlight, _super);
+    function SyntaxHighlight(props) {
+        var _this = _super.call(this, props) || this;
+        _this.handleChange = function (data) {
+            _this.props.onChange(data);
+        };
+        _this.state = {
+            isCopied: false
+        };
+        _this._onClick = _this._onClick.bind(_this);
+        return _this;
+    }
+    SyntaxHighlight.prototype._onClick = function () {
+        var _this = this;
+        this.setState({ isCopied: true });
+        setTimeout(function () { _this.setState({ isCopied: false }); }, 1500);
+    };
+    SyntaxHighlight.prototype.render = function () {
+        var content = this.props.editCodeContent ? this.props.editCodeContent : '';
+        var alignment = this.props.align ? "container__" + this.props.align : 'container__left';
+        var fullWidth = this.props.fullWidth ? "container__full_width" : '';
+        return (React.createElement("div", { className: styles.syntaxHighlight },
+            React.createElement("div", { className: styles.container + " " + styles[alignment] + " " + styles[fullWidth] },
+                this.props.titleCode &&
+                    React.createElement("h3", { className: styles.syntaxHighlight__headline }, this.props.titleCode),
+                !this.props.isEditMode &&
+                    React.createElement(CopyToClipboard, { text: content },
+                        React.createElement(PrimaryButton, { className: styles.clipboardTab, text: this.state.isCopied ? "Copied!" : "Copy", iconProps: copyIcon, onClick: this._onClick })),
+                this.props.isEditMode &&
+                    React.createElement(AceEditor, { theme: this.props.theme ? this.props.theme : 'monokai', mode: this.props.language ? this.props.language : 'javascript', showGutter: this.props.showGutter, fontSize: this.props.fontSize ? this.props.fontSize : 14, value: content, width: "100%", onChange: this.handleChange, enableSnippets: true, wrapEnabled: true, maxLines: Infinity, setOptions: {
+                            showLineNumbers: true,
+                            displayIndentGuides: true,
+                            enableBasicAutocompletion: true,
+                            enableLiveAutocompletion: true,
+                            tabSize: 2
+                        } }),
+                !this.props.isEditMode &&
+                    React.createElement(AceEditor, { theme: this.props.theme ? this.props.theme : 'monokai', mode: this.props.language ? this.props.language : 'javascript', readOnly: true, showGutter: this.props.showGutter, fontSize: this.props.fontSize ? this.props.fontSize : 14, value: content, width: "100%", maxLines: Infinity, wrapEnabled: true, setOptions: {
+                            showLineNumbers: true,
+                            displayIndentGuides: true,
+                            tabSize: 2
+                        } }))));
+    };
+    return SyntaxHighlight;
+}(React.Component));
+export default SyntaxHighlight;
+//# sourceMappingURL=SyntaxHighlight.js.map
