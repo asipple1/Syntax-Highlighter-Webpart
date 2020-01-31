@@ -110,7 +110,7 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
                     {key: 'json', text: 'JSON'},
                     {key: 'html', text: 'HTML'},
                     {key: 'typescript', text: 'Typescript'},
-                    {key: 'SQL', text: 'SQL'},
+                    {key: 'sql', text: 'SQL'},
                   ]
                 }),
                 PropertyPaneDropdown('theme', {
