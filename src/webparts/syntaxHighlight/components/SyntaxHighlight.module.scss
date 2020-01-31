@@ -17,18 +17,31 @@
       margin: 0 0 0 auto;
     }
 
-    .clipboardTab {
-      opacity: 0;
-      transform: translateY(75%);
-      transition: .5s ease;
-    }
-
     &:hover {
       .clipboardTab {
         opacity: 1;
         transform: translateY(0);
+        transition: .5s ease;
       }
     }
+
+    .clipboardTab {
+      opacity: 0;
+      transform: translateY(75%);
+      position: absolute;
+      z-index: 9999999;
+      transition: .5 ease;
+
+      &:active {
+        background-color: #F03F2E;
+        transition: background-color 0s, transform .5s ease, opacity .5s ease;
+      }
+
+      &:not(:active) {
+        transition: background-color 3s ease-out, transform .5s ease, opacity .5s ease;
+      }
+    }
+
   }
 
   &__headline {

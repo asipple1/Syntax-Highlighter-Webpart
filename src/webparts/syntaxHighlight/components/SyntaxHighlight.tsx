@@ -65,6 +65,7 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
       isCopied: false,
       isExpanded: false,
     }
+
     this._onCopyClick = this._onCopyClick.bind(this);
     this._onExpandClick = this._onExpandClick.bind(this);
   }
@@ -96,7 +97,7 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
           { !this.props.isEditMode &&
             <CopyToClipboard text={this.props.editCodeContent}>
                 <PrimaryButton
-                className={styles.clipboardTab}
+                className={`${styles.clipboardTab} ${this.state.isCopied ? 'animated': ''}` }
                 text={this.state.isCopied ? "Copied!" : "Copy"}
                 iconProps={copyIcon}
                 onClick={this._onCopyClick}

@@ -24,7 +24,7 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
   private guid: string;
 
   public render(): void {
-    // const props = this.properties;
+    const props = this.properties;
 
     const element: React.ReactElement<ISyntaxHighlightProps > = React.createElement(
       SyntaxHighlight,
