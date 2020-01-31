@@ -24,7 +24,7 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
   private guid: string;
 
   public render(): void {
-    const props = this.properties;
+    // const props = this.properties;
 
     const element: React.ReactElement<ISyntaxHighlightProps > = React.createElement(
       SyntaxHighlight,
@@ -38,10 +38,18 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
         showGutter: this.properties.showGutter,
         fullWidth: this.properties.fullWidth,
         align: this.properties.align,
+        onChange: this.handleContentChange,
       }
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+     /**
+   * Saves the updated content to the web part properties
+   */
+  private handleContentChange = (code: string) => {
+    this.properties.editCodeContent = code;
   }
 
   protected onDispose(): void {
@@ -86,13 +94,13 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
                 PropertyPaneDropdown('language', {
                   label: 'Code Language',
                   options: [
+                    {key: 'text', text: 'Plain Text'},
                     {key: 'javascript', text: 'Javascript'},
                     {key: 'sh', text: 'Bash/shell'},
                     {key: 'php', text: 'PHP'},
                     {key: 'python', text: 'Python'},
                     {key: 'css', text: 'CSS'},
                     {key: 'scss', text: 'SCSS'},
-                    {key: 'sass', text: 'SASS'},
                     {key: 'xml', text: 'XML'},
                     {key: 'ruby', text: 'Ruby'},
                     {key: 'yaml', text: 'Yaml'},
@@ -101,7 +109,8 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
                     {key: 'mysql', text: 'Mysql'},
                     {key: 'json', text: 'JSON'},
                     {key: 'html', text: 'HTML'},
-                    {key: 'typescript', text: 'Typescript'}
+                    {key: 'typescript', text: 'Typescript'},
+                    {key: 'SQL', text: 'SQL'},
                   ]
                 }),
                 PropertyPaneDropdown('theme', {
