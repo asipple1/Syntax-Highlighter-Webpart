@@ -32,7 +32,9 @@ const languages = [
   "mysql",
   "json",
   "html",
-  "typescript"
+  "typescript",
+  "text",
+  "sql",
 ];
 
 const themes = [
