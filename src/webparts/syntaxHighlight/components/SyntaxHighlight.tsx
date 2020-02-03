@@ -89,11 +89,6 @@ export default class SyntaxHighlight extends React.Component<ISyntaxHighlightPro
     return (
       <div className={styles.syntaxHighlight}>
         <div className={`${styles.container} ${styles[alignment]} ${styles[fullWidth]}`}>
-          { this.props.titleCode &&
-            <h3 className={styles.syntaxHighlight__headline}>
-              {this.props.titleCode}
-            </h3>
-          }
           { !this.props.isEditMode &&
             <CopyToClipboard text={this.props.editCodeContent}>
                 <PrimaryButton

@@ -1,6 +1,5 @@
 export interface ISyntaxHighlightWebPartProps {
   isEditMode:boolean;
-  titleCode: string;
   editCodeContent: string;
   liveCodeContent: string;
   language: string;

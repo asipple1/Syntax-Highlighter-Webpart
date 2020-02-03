@@ -30,7 +30,6 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
       SyntaxHighlight,
       {
         isEditMode: this.displayMode === DisplayMode.Edit,
-        titleCode: this.properties.titleCode,
         editCodeContent: this.properties.editCodeContent,
         language: this.properties.language,
         theme: this.properties.theme,
@@ -87,10 +86,6 @@ export default class SyntaxHighlightWebPart extends BaseClientSideWebPart<ISynta
           groups: [
             {
               groupFields: [
-                PropertyPaneTextField('titleCode', {
-                  label: 'Title',
-                  multiline: true
-                }),
                 PropertyPaneDropdown('language', {
                   label: 'Code Language',
                   options: [
